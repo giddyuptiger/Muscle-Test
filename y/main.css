@@ -1,0 +1,21 @@
+.button {
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  background-color: rgb(195, 233, 255);
+  border-color: rgb(211, 211, 211);
+  border-style: solid;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
