@@ -1,9 +1,14 @@
 // let buttonsDiv = elt("div", { id: "buttons" });
+document.body.setAttribute("ontouchstart", "");
 let buttonDiv = elt("div", { id: "button" });
+let answerDiv = elt("div", { id: "answerDiv" });
 let answerBox = elt("div", { id: "answerBox" });
+let answerWindow = elt("div", { id: "answer-window" });
 document.body.appendChild(buttonDiv);
 // document.body.appendChild(buttonsDiv);
-document.body.appendChild(answerBox);
+answerDiv.appendChild(answerBox);
+answerDiv.appendChild(answerWindow);
+document.body.appendChild(answerDiv);
 // setButtons();
 buttonDiv.appendChild(
   elt("button", {
@@ -51,6 +56,7 @@ function selection() {
 // }
 
 function showAnswer(answer) {
+  console.log(answer);
   if (answer) {
     answer = "TRUE";
   } else {
@@ -58,9 +64,9 @@ function showAnswer(answer) {
   }
   answerBox.innerHTML = "";
   let answerHTML = elt("h1", { id: "answer", class: "answer" }, answer);
+  answerHTML.style.opacity = "1";
   // setButtons();
   answerBox.appendChild(answerHTML);
-  answerHTML.style.opacity = "1";
   // setTimeout(() => {
   //   answerHTML.style.opacity = "1";
   // }, "20");
