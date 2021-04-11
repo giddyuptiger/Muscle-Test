@@ -1,94 +1,54 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//   const loadEl = document.querySelector("#load");
-//   // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//   // // The Firebase SDK is initialized and available here!
-//   //
-//   // firebase.auth().onAuthStateChanged(user => { });
-//   // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-//   // firebase.firestore().doc('/foo/bar').get().then(() => { });
-//   // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-//   // firebase.messaging().requestPermission().then(() => { });
-//   // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-//   // firebase.analytics(); // call to activate
-//   // firebase.analytics().logEvent('tutorial_completed');
-//   // firebase.performance(); // call to activate
-//   //
-//   // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-//   try {
-//     let app = firebase.app();
-//     let features = [
-//       "auth",
-//       "database",
-//       "firestore",
-//       "functions",
-//       "messaging",
-//       "storage",
-//       "analytics",
-//       "remoteConfig",
-//       "performance",
-//     ].filter((feature) => typeof app[feature] === "function");
-//     loadEl.textContent = `Firebase SDK loaded with ${features.join(", ")}`;
-//   } catch (e) {
-//     console.error(e);
-//     loadEl.textContent = "Error loading the Firebase SDK, check the console.";
-//   }
-// });
-let buttonDiv = elt("div", { id: "buttons" });
+// let buttonsDiv = elt("div", { id: "buttons" });
+let buttonDiv = elt("div", { id: "button" });
+let answerBox = elt("div", { id: "answerBox" });
 document.body.appendChild(buttonDiv);
-setButtons();
+// document.body.appendChild(buttonsDiv);
+document.body.appendChild(answerBox);
+// setButtons();
+buttonDiv.appendChild(
+  elt("button", {
+    id: "left-btn",
+    className: "button",
+    onclick: function () {
+      showAnswer(state);
+    },
+  })
+);
 
-function setButtons() {
-  buttonDiv.innerHTML = "";
-  let options = {};
-  let answer = Math.floor(Math.random() * 2);
-  if (answer == 0) options = { left: true, right: false };
-  if (answer == 1) options = { left: false, right: true };
-  buttonDiv.appendChild(
-    elt("button", {
-      id: "left-btn",
-      className: "button",
-      "data-answer": options.left,
-      onclick: function () {
-        showAnswer(options.left);
-      },
-    })
-  );
-  buttonDiv.appendChild(
-    elt("button", {
-      id: "right-btn",
-      className: "button",
-      "data-answer": options.right,
-      onclick: function () {
-        showAnswer(options.right);
-      },
-    })
-  );
+let state;
+setInterval(selection, 100);
+function selection() {
+  let TF = Math.floor(Math.random() * 2);
+  TF ? (state = 1) : (state = 0);
 }
 
-// document.body.appendChild(
-//   elt(
-//     "div",
-//     { id: "buttons" },
+// function setButtons() {
+//   buttonsDiv.innerHTML = "";
+//   let options = {};
+//   let answer = Math.floor(Math.random() * 2);
+//   if (answer == 0) options = { left: true, right: false };
+//   if (answer == 1) options = { left: false, right: true };
+//   buttonsDiv.appendChild(
 //     elt("button", {
-//       id: "button1",
+//       id: "left-btn",
 //       className: "button",
+//       "data-answer": options.left,
 //       onclick: function () {
-//         makeAnswer("left");
-//       },
-//     }),
-//     elt("button", {
-//       id: "button2",
-//       className: "button",
-//       onclick: function () {
-//         makeAnswer("right");
+//         showAnswer(options.left);
 //       },
 //     })
-//   )
-// );
-
-let answerBox = elt("div", { id: "answerBox" });
-document.body.appendChild(answerBox);
+//   );
+//   buttonsDiv.appendChild(
+//     elt("button", {
+//       id: "right-btn",
+//       className: "button",
+//       "data-answer": options.right,
+//       onclick: function () {
+//         showAnswer(options.right);
+//       },
+//     })
+//   );
+// }
 
 function showAnswer(answer) {
   if (answer) {
@@ -98,15 +58,15 @@ function showAnswer(answer) {
   }
   answerBox.innerHTML = "";
   let answerHTML = elt("h1", { id: "answer", class: "answer" }, answer);
-  setButtons();
+  // setButtons();
   answerBox.appendChild(answerHTML);
-  answerBox.style.display = "none";
+  answerHTML.style.opacity = "1";
+  // setTimeout(() => {
+  //   answerHTML.style.opacity = "1";
+  // }, "20");
   setTimeout(() => {
-    answerBox.style.display = "block";
-  }, "20");
-  setTimeout(() => {
-    answerHTML.remove();
-  }, "3000");
+    answerHTML.style.opacity = "0";
+  }, "10");
 }
 
 // function makeAnswer(button) {

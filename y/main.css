@@ -7,7 +7,8 @@
   border-style: solid;
 }
 
-#buttons {
+#buttons,
+#button {
   display: flex;
   justify-content: center;
 }
@@ -18,4 +19,15 @@ h3 {
 
 body {
   font-family: "Roboto", sans-serif;
+}
+
+#answer {
+  opacity: 1;
+  transition: 2s opacity;
+  text-align: center;
+  font-size: 32px;
+}
+
+:focus {
+  outline: none;
 }
